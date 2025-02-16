@@ -1,0 +1,31 @@
+name: Continuous Integration (CI)
+
+# Trigger the workflow only when code is pushed to the 'main' branch
+on:
+  push:
+    branches:
+      - master  # The workflow will only run on pushes to the main branch
+
+# Define jobs that the workflow will run
+jobs:
+  build:
+    runs-on: ubuntu-latest  # This specifies the OS for the job to run on
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This step checks out the repository code to the runner
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Set the Python version to use
+
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt  # Install any dependencies in your repository
+
+    - name: Run tests
+      run: |
+        # pytest  # Run the test suite (assuming you're using pytest for testing)
+        echo "printing the code"
