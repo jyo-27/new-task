@@ -1,0 +1,16 @@
+name: Sample proogram for dispatch event
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: run the code
+      run: |
+        echo "runs the code"
+
