@@ -1,0 +1,10 @@
+class LoginLocators:
+    # click_on_login_page='a:text-is("Login Form")'
+    login_username_locators = '[id="username"]'
+    login_password_locators = '[id="password"]'
+    login_button_locators = 'button:text-is("Login")'
+    sucess_login_button = 'b:text-is("You logged into a secure area!")'
+    log_out_before_login = 'b:text-is("You\'re logged in. Please log out before logging in as a different user")'
+    log_out = 'i:text-is("Logout")'
+    login_name_invalid = 'b:text-is("Your username is invalid!")'
+    login_password_invalid = 'b:text-is("Your password is invalid!")'

@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "playwright_pytest"
+description = ""
+version = "0.1.0"
+authors = ["jyothiyerrabothula <jyothiyerrabothula@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.2.2"
+playwright = "1.49.1"
+
