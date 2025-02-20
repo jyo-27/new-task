@@ -66,6 +66,10 @@ jobs:
     - name: Check if pytest is installed
       run: |
         poetry show pytest 
+
+    - name: Install Playwright Browsers
+      run: |
+          poetry run playwright install
     
     - name: run the code
       run: |
