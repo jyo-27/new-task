@@ -1,9 +1,8 @@
 [tool.poetry]
-name = "NEW_TASK"
+name = "new_task"
 version = "0.1.0"
 description = "work"
 authors = ["jyo-27 <jyo2702123@gmail.com>"]
-license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.12"
