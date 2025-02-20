@@ -22,6 +22,7 @@ jobs:
     - name: install poetry
       run: |
         pip install poetry
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
 
     - name: install dependencies in python
       run: |
