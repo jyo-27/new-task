@@ -15,8 +15,9 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: install toml 
-      run: pip install toml
+    - name: install requirements.txt file
+      run: |
+        pip install -r requirements.txt
 
     - name: run the code
       run: |
