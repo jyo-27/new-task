@@ -13,7 +13,7 @@ jobs:
     - name: set up python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.12
 
     - name: Update pip to the latest version
       run: |
@@ -45,7 +45,7 @@ jobs:
     - name: set up python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.12
 
     - name: install poetry
       run: |
