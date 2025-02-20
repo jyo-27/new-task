@@ -22,6 +22,12 @@ jobs:
     - name: install poetry
       run: |
         pip install poetry
+        # Print installation location
+        echo "Poetry installed at:"
+        which poetry
+        # Print Poetry version
+        poetry --version
+        # Add Poetry to PATH
         echo "$HOME/.local/bin" >> $GITHUB_PATH
 
     - name: install dependencies in python
@@ -40,6 +46,18 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
+    - name: install poetry
+      run: |
+        pip install poetry
+        # Print installation location
+        echo "Poetry installed at:"
+        which poetry
+        # Print Poetry version
+        poetry --version
+        # Add Poetry to PATH
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    
     - name: run the code
       run: |
           echo "runs the code"
