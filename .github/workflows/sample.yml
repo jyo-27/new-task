@@ -42,27 +42,30 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: set up python
+    - name: set up python   
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12
+
+    - name: install poetry
+      run: |
+        pip install poetry
+        # Print installation location
+        echo "Poetry installed at:"
+        which poetry
+        # Print Poetry version
+        poetry --version
+        # Add Poetry to PATH
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    
+    - name: install dependencies in python
       run: |
         poetry install --no-root
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.12
+  
 
-    # - name: install poetry
-    #   run: |
-    #     pip install poetry
-    #     # Print installation location
-    #     echo "Poetry installed at:"
-    #     which poetry
-    #     # Print Poetry version
-    #     poetry --version
-    #     # Add Poetry to PATH
-    #     echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-    # - name: Check if pytest is installed
-    #   run: |
-    #     poetry show pytest 
+    - name: Check if pytest is installed
+      run: |
+        poetry show pytest 
     
     - name: run the code
       run: |
