@@ -57,6 +57,10 @@ jobs:
         poetry --version
         # Add Poetry to PATH
         echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Check if pytest is installed
+      run: |
+        poetry show pytest 
     
     - name: run the code
       run: |
