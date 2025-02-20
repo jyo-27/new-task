@@ -74,5 +74,5 @@ jobs:
     - name: run the code
       run: |
           echo "runs the code"
-          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py --headed
+          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
 
