@@ -15,9 +15,18 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: install requirements.txt file
+    - name: Update pip to the latest version
       run: |
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+
+    - name: install poetry
+      run: |
+        pip install poetry
+
+    - name: install dependencies in python
+      run: |
+        poetry install
+
 
   run_tests:
     needs: install_dependencies
@@ -33,5 +42,5 @@ jobs:
     - name: run the code
       run: |
           echo "runs the code"
-          pytest automation/tests/login_page_dertails_test/login_page_test_info.py --headed
+          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py --headed
 
