@@ -33,5 +33,5 @@ jobs:
     - name: run the code
       run: |
           echo "runs the code"
-          pytest automation\tests\login_page_dertails_test\login_page_test_info.py
+          pytest automation/tests/login_page_dertails_test/login_page_test_info.py --headed
 
