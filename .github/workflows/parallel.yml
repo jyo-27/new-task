@@ -1,0 +1,25 @@
+name: Parallel workflow
+ 
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest  
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  
+
+    - name: Run tests
+      run: |
+        echo "printing the job1 code"
+  job2:
+    runs-on: ubuntu-latest  
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  
+
+    - name: Run tests
+      run: |
+        echo "printing the job2 code"
