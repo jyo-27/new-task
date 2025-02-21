@@ -1,0 +1,73 @@
+name: Sample proogram for Cache workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.12
+
+    - name: Update pip to the latest version
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Install Poetry
+      run: |
+        pip install poetry
+        echo "Poetry installed at:"
+        which poetry
+        poetry --version
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies in Python
+      run: |
+        poetry install --no-root
+
+    - name: Cache poetry dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: poetry-cache-key  
+        restore-keys: |
+          poetry-cache-key
+
+  run_tests:
+    needs: install_dependencies
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.12
+
+    - name: Add Poetry to PATH
+      run: |
+        echo "$HOME/.local/bin" >> $GITHUB_PATH  
+
+    - name: Check if Poetry is installed
+      run: |
+        which poetry  
+        poetry --version  
+
+    - name: Check if pytest is installed
+      run: |
+        poetry show pytest  
+
+    - name: Install Playwright Browsers
+      run: |
+        poetry run playwright install  
+
+    - name: Run the tests
+      run: |
+        poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
