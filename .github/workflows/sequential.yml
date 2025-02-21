@@ -62,6 +62,10 @@ jobs:
           restore-keys: |
            poetry-cache-key
 
+    - name: Add poetry to PATH
+      run: |
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
     - name: Check if pytest is installed
       run: |
         poetry show pytest 
