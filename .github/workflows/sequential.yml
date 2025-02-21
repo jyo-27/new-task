@@ -34,6 +34,13 @@ jobs:
       run: |
         poetry install --no-root
 
+    - name: Cache poetry dependencies
+      uses: actions/cache@v2
+      with:
+          path: ~/.cache/pip
+          key: poetry-cache-key  
+          restore-keys: |
+           poetry-cache-key
 
   run_tests:
     needs: install_dependencies
@@ -47,13 +54,18 @@ jobs:
       with:
         python-version: 3.12
     
-    - name: Add poetry to PATH
-      run: |
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: Restore poetry cache
+      uses: actions/cache@v2
+      with:
+          path: ~/.cache/pip
+          key: poetry-cache-key  
+          restore-keys: |
+           poetry-cache-key
 
     - name: Check if pytest is installed
       run: |
         poetry show pytest 
+        
 
     - name: Install Playwright Browsers
       run: |
