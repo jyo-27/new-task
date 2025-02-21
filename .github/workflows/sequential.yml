@@ -47,10 +47,9 @@ jobs:
       with:
         python-version: 3.12
     
-    - name: install dependencies in python
+    - name: Add poetry to PATH
       run: |
-        poetry install --no-root
-  
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
 
     - name: Check if pytest is installed
       run: |
