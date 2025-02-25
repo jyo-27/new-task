@@ -95,4 +95,4 @@ jobs:
       - name: Running the tests
         run: echo "Running tests..."  # Replace with your actual test command
       - name: running the script
-        run: echo "printing the code"
+        run: run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
