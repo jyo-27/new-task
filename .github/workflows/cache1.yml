@@ -1,0 +1,70 @@
+name: Poetry CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      # Cache Poetry cache directory
+      - name: Cache Poetry cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-cache-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-cache-
+          
+      # Install Poetry using pip
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          echo "Poetry installed at:"
+          which poetry
+          poetry --version
+
+      # Install dependencies using Poetry
+      - name: Install dependencies with Poetry
+        run: poetry install --no-root
+
+      # Cache Python packages (optional)
+      - name: Cache Python packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.local  # Cache Python packages installed by Poetry
+          key: ${{ runner.os }}-poetry-dependencies-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-dependencies-
+
+  use_poetry_cache:
+    needs: install_dependencies  # This makes sure this job runs after the previous one
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Restore Poetry cache
+      - name: Restore Poetry cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-cache-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-cache-
+
+      # Poetry is already installed from the previous job, no need to install again.
+      # We just verify its version here.
+      - name: Check Poetry version
+        run: poetry --version
+
+      # Example of running your code
+      - name: Running the code
+        run: echo "printing the code"
