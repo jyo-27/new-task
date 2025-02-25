@@ -63,6 +63,14 @@ jobs:
     - name: Check if pytest is installed
       run: |
         poetry show pytest  
+    - name: Cache poetry dependencies in run_tests job  # <-- Restore cache here
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip  # Same path as the cache in install_dependencies job
+        key: poetry-cache-key  # Use the same key here
+        restore-keys: |
+          poetry-cache-key
+
 
     - name: Install Playwright Browsers
       run: |
