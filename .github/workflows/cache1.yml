@@ -34,6 +34,11 @@ jobs:
       - name: Install dependencies with Poetry
         run: poetry install --no-root
 
+      # Install Playwright browsers
+      - name: Install Playwright browsers
+        run: |
+          poetry run playwright install
+
       # Cache Python dependencies
       - name: Cache Python dependencies
         uses: actions/cache@v3
@@ -51,6 +56,15 @@ jobs:
           key: ${{ runner.os }}-poetry-bin-${{ hashFiles('**/pyproject.toml') }}
           restore-keys: |
             ${{ runner.os }}-poetry-bin-
+
+      # Cache Playwright browsers
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-browsers-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-browsers-
 
   use_poetry_cache:
     needs: install_dependencies  # This makes sure this job runs after the previous one
@@ -87,12 +101,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-poetry-dependencies-
 
+      # Restore Playwright browsers cache
+      - name: Restore Playwright browsers cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-browsers-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-browsers-
+
       # Check Poetry version (Poetry should now be available)
       - name: Check Poetry version
         run: poetry --version
 
       # Example of running your code (tests)
-      - name: Running the tests
-        run: echo "Running tests..."  # Replace with your actual test command
+      - name: Run the tests
+        run: poetry run pytest  # Use poetry run to ensure it's using the Poetry environment
+
       - name: running the script
         run: poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
