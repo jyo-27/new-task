@@ -54,6 +54,13 @@ jobs:
     - name: Add Poetry to PATH
       run: |
         echo "$HOME/.local/bin" >> $GITHUB_PATH  
+    - name: Check current path
+      run: |
+        echo $PATH  # Check if the Poetry path is actually included
+
+    - name: Debug poetry installation in run_tests
+      run: |
+        which poetry || echo "Poetry is not installed"  
 
     - name: Check if Poetry is installed
       run: |
