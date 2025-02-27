@@ -1,9 +1,7 @@
-name: Poetry CI Workflow
+name: Poetry with cache workflow on CI
 
 on:
-  push:
-    branches:
-      - master
+   workflow_dispatch:
 
 jobs:
   install_dependencies:
