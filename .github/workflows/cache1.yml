@@ -114,9 +114,5 @@ jobs:
       - name: Check Poetry version
         run: poetry --version
 
-      # Example of running your code (tests)
       - name: Run the tests
-        run: poetry run pytest  # Use poetry run to ensure it's using the Poetry environment
-
-      - name: running the script
         run: poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
