@@ -83,7 +83,8 @@ jobs:
 
     - name: Upload pytest results to Artifactory
       run: |
-        jfrog rt u "test_results/results.txt" "new-task/pytest-results/results.txt" --flat=true
+        jfrog rt u "test_results/results.txt" "new-task/pytest-results/results.txt" --flat=true --url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --apikey=$ARTIFACTORY_API_KEY
+
       env:
         ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
         ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
