@@ -81,11 +81,10 @@ jobs:
       run: |
           jfrog config add my-artifactory --artifactory-url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_API_KEY
 
-    - name: Upload pytest results to Artifactory
-      run: |
-        jfrog rt u "test_results/results.txt" "new-task/pytest-results/results.txt" --flat=true --url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --apikey=$ARTIFACTORY_API_KEY
-
-      env:
-        ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-        ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
-        ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
+    - name: Upload to Artifactory
+        env:
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+          ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
+        run: |
+          jfrog rt u "test_results/results.txt" "new-task/pytest-results/results.txt" --flat=true --url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --apikey=$ARTIFACTORY_API_KEY
