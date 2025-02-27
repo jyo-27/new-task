@@ -79,7 +79,7 @@ jobs:
 
     - name: Configure JFrog CLI with Artifactory credentials
       run: |
-          jfrog config add <server-id> --artifactory-url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_API_KEY
+          jfrog config add my-artifactory --artifactory-url=$ARTIFACTORY_URL --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_API_KEY
 
     - name: Upload pytest results to Artifactory
       run: |
