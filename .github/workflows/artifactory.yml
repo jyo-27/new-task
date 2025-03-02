@@ -93,5 +93,5 @@ jobs:
   
       - name: read the test results
         run: |
-          cat ./test_results/result.txt
+          cat pytest-results/result.txt
          
