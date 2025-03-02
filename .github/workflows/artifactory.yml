@@ -1,4 +1,4 @@
-name: Sample proogram for sequentialworkflow
+name: Sample proogram for artifacts
 
 on:
   workflow_dispatch:
@@ -63,18 +63,18 @@ jobs:
     - name: Install Playwright Browsers
       run: |
           poetry run playwright install
-    
-    - name: run the code
-      run: |
-          echo "runs the code"
-          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
+     
     - name: Create a directory for test results
       run: |
           mkdir -p ./test_results 
-          echo "Test Result: Passed" > ./test_results/result.txt
+
+    - name: run the code
+      run: |
+          echo "runs the code"
+          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py >> ./test_results/result.txt
 
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
           name: pytest-results
-          path: ./test_results 
+          path: ./test_results/result.txt 
