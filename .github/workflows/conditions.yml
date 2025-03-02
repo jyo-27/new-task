@@ -42,12 +42,14 @@ jobs:
           echo "runs the code"
           poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
       id: run_tests 
+      continue-on-error: true
     
     - name: Success message
       if: ${{ steps.run-tests.outcome == 'success' }}
       run: |
         echo "Tests passed successfully!"
       id: success-message
+      
     - name: failure message
       if: ${{ steps.run-tests.outcome == 'failure' }}
       run: |
