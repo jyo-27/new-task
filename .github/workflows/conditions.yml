@@ -1,0 +1,55 @@
+name: If condition with ID
+ 
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest  
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  
+      id: checkout
+
+    - name: set up python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.12
+
+    - name: Update pip to the latest version
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: install poetry
+      run: |
+        pip install poetry
+        echo "Poetry installed at:"
+        which poetry
+        poetry --version
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: install dependencies in python
+      run: |
+        poetry install --no-root
+      id: install
+      
+    - name: Install Playwright Browsers
+      run: |
+          poetry run playwright install
+    
+    - name: run the code
+      run: |
+          echo "runs the code"
+          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py 
+      id: run_tests 
+    
+    - name: Success message
+      if: ${{ steps.run-tests.outcome == 'success' }}
+      run: |
+        echo "Tests passed successfully!"
+      id: success-message
+    - name: failure message
+      if: ${{ steps.run-tests.outcome == 'Failure' }}
+      run: |
+        echo "Test case Failure!"
+      id: failure-message
