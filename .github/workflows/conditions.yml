@@ -49,7 +49,7 @@ jobs:
         echo "Tests passed successfully!"
       id: success-message
     - name: failure message
-      if: ${{ steps.run-tests.outcome == 'Failure' }}
+      if: ${{ steps.run-tests.outcome == 'failure' }}
       run: |
         echo "Test case Failure!"
       id: failure-message
