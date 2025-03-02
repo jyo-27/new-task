@@ -3,7 +3,7 @@ name: If condition with ID
 on:
   workflow_dispatch:
 jobs:
-  job1:
+  job:
     runs-on: ubuntu-latest  
 
     steps:
@@ -45,13 +45,13 @@ jobs:
       continue-on-error: true
     
     - name: Success message
-      if: ${{ steps.run-tests.outcome == 'success' }}
+      if: ${{ steps.run_tests.outcome == 'success' }}
       run: |
         echo "Tests passed successfully!"
       id: success-message
       
     - name: failure message
-      if: ${{ steps.run-tests.outcome == 'failure' }}
+      if: ${{ steps.run_tests.outcome == 'failure' }}
       run: |
         echo "Test case Failure!"
       id: failure-message
