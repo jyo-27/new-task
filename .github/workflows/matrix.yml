@@ -24,7 +24,7 @@ jobs:
           
       - name: Upgrade pip
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip --no-cache-dir
       
       - name: Print message
         run: |
