@@ -16,7 +16,7 @@ jobs:
       # 2. Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t python-app .
+          docker build -f task/.github/workflows/Dockerfile -t python-app task/
 
       # 3. Run Docker container with environment variables
       - name: Run tests in Docker container
