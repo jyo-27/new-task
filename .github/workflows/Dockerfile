@@ -23,4 +23,4 @@ RUN python -m pip install --upgrade pip
 ENV PATH="$HOME/.local/bin:$PATH"
 
 # Command to run your tests when the container starts
-CMD ["poetry", "run", "pytest", "a.py"]
+CMD ["poetry", "run", "pytest", "automation/tests/login_page_dertails_test/login_page_test_info.py "]
