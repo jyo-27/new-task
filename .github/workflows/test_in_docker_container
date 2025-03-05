@@ -1,0 +1,36 @@
+name: Python Tests in Docker Container
+
+on:
+  workflow_dispatch:  # Manually trigger the workflow
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest  # Runs the job on Ubuntu
+
+    steps:
+      # 1. Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+        id: checkout
+
+      # 2. Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t python-app .
+
+      # 3. Run Docker container with environment variables
+      - name: Run tests in Docker container
+        run: |
+          docker run --name python-container python-app
+
+      # 4. Success message
+      - name: Success message
+        if: ${{ success() }}
+        run: |
+          echo "Tests passed successfully!"
+
+      # 5. Failure message
+      - name: Failure message
+        if: ${{ failure() }}
+        run: |
+          echo "Test case failure!"
