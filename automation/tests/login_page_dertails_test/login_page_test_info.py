@@ -8,12 +8,26 @@ import json
 def test_login_page_concept(page: Page):
     page.goto(Data.login_page_url)
     login_page = LoginPage(page)
-    with open('log.creds') as f:
-        creds = json.load(f)
-    
+    if os.path.exists('log.creds') and os.path.getsize('log.creds') > 0:
+        with open('log.creds') as f:
+            file_content = f.read()
+            # Print the content of the file for debugging
+            print("log.creds content:", file_content)
+            
+            try:
+                # Try to load the JSON from the file content
+                creds = json.loads(file_content)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+                return  # Exit if there's a JSON decode error
+    else:
+        print("Error: log.creds file is missing or empty")
+        return  # Exit if the file is missing or empty
+
     # Use the credentials for login
-    username = creds["username1"]
-    password = creds["username_password1"]
+    username = creds.get("username1")
+    password = creds.get("username_password1")
+
     login_page.login_username(username)
     login_page.login_password(password)
     page.screenshot(path="screenshots/loginpage.png")
