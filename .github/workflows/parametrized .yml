@@ -1,0 +1,50 @@
+name: Parametrtized with log
+
+on:
+  workflow_dispatch:
+    inputs:
+      log_path:
+        description: 'Path to log.json'
+        required: true
+        default: 'new-task/log1.json'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: install poetry
+        run: |
+          pip install poetry
+          echo "Poetry installed at:"
+          which poetry
+          poetry --version
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      
+    - name: install dependencies in python
+      run: |
+        poetry install --no-root
+  
+
+    - name: Check if pytest is installed
+      run: |
+        poetry show pytest 
+
+    - name: Install Playwright Browsers
+      run: |
+          poetry run playwright install
+    - name: Set log.json environment variable
+      run: |
+        echo "LOG_FILE_PATH=${{ github.event.inputs.log_path }}" >> $GITHUB_ENV
+
+    - name: run the code
+      run: |
+          echo "runs the code"
+          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py
