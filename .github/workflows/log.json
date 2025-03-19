@@ -1,0 +1,8 @@
+data = {
+    "login_user_name": "practice",
+    "login_password": "SuperSecretPassword!",
+    "username1": "your_username1",
+    "password1": "your_password1",
+    "username2": "your_username2",
+    "password2": "your_password2"
+}
