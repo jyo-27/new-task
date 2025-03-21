@@ -28,23 +28,23 @@ jobs:
           poetry --version
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       
-    - name: install dependencies in python
-      run: |
-        poetry install --no-root
+      - name: install dependencies in python
+        run: |
+          poetry install --no-root
+    
   
-
-    - name: Check if pytest is installed
-      run: |
-        poetry show pytest 
-
-    - name: Install Playwright Browsers
-      run: |
-          poetry run playwright install
-    - name: Set log.json environment variable
-      run: |
-        echo "LOG_FILE_PATH=${{ github.event.inputs.log_path }}" >> $GITHUB_ENV
-
-    - name: run the code
-      run: |
-          echo "runs the code"
-          poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py
+      - name: Check if pytest is installed
+        run: |
+          poetry show pytest 
+  
+      - name: Install Playwright Browsers
+        run: |
+            poetry run playwright install
+      - name: Set log.json environment variable
+        run: |
+          echo "LOG_FILE_PATH=${{ github.event.inputs.log_path }}" >> $GITHUB_ENV
+  
+      - name: run the code
+        run: |
+            echo "runs the code"
+            poetry run pytest automation/tests/login_page_dertails_test/login_page_test_info.py
