@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.x'
+          python-version: '3.12'
 
       - name: install poetry
         run: |
@@ -30,9 +30,7 @@ jobs:
       
       - name: install dependencies in python
         run: |
-          pip install --no-cache-dir --use-pep517 "greenlet==3.0.3"
-
-          poetry install --no-root
+            poetry install --no-root
     
   
       - name: Check if pytest is installed
