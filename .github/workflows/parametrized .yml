@@ -30,6 +30,8 @@ jobs:
       
       - name: install dependencies in python
         run: |
+          pip install --no-cache-dir --use-pep517 "greenlet==3.0.3"
+
           poetry install --no-root
     
   
