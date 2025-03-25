@@ -1,0 +1,8 @@
+name: reusable workflow
+
+on:
+  workflow_dispatch
+
+jobs:
+  use-common-workflow:
+    uses: ./.github/workflows/common_workflow.yml  
