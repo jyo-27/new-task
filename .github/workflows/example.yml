@@ -8,3 +8,12 @@ jobs:
     uses: ./.github/workflows/common_workflow.yml  
     with:
        python-version: '3.12'  
+
+  job2:
+    needs: use-common-workflow
+    runs-on: ubuntu-latest
+    steps: 
+      - name: running the code
+        run: |
+            echo "print something"
+ 
