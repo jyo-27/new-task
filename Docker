@@ -1,0 +1,14 @@
+# Start by pulling a base image
+FROM ubuntu:20.04
+
+# Install any dependencies or additional steps
+RUN apt-get update && apt-get install -y curl
+
+# Now, you can add files into the Docker image (if needed)
+COPY myfile.txt /app/
+
+# Set your working directory
+WORKDIR /app
+
+# Run a command (e.g., start a service or application)
+CMD ["echo", "Hello World"]
