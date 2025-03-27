@@ -1,0 +1,17 @@
+name: Sequential workflow
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest  
+    steps:
+    - name: Run job1
+      run: |
+        echo "printing the job1 code"
+  job2:
+    runs-on: ubuntu-latest  
+    needs: job1
+    steps:
+    - name: Run job2
+      run: |
+        echo "printing the job2 code"
